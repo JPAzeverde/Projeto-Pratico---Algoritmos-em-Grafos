@@ -1,22 +1,81 @@
-##Projeto Grafos - Etapa 1
-##Trabalho da disciplina GCC218/GCC262 (UFLA) — Etapa 1: Pré-processamento dos dados.
+# Análise e Solução de Instâncias NEARP
+Este projeto implementa a análise e uma solução heurística para instâncias do Problema de Roteamento Rural com Demandas e Capacidades (NEARP). Ele foi desenvolvido em Python e processa instâncias no formato .dat armazenadas na pasta instancia/.
 
-Estrutura
-instancias/: arquivos de entrada (IDs 0 a 48)
+# Estrutura de Pastas
+.
+├── analiseGrafo.py
+├── vizualizarGrafo.ipynb
+├── instancia/
+│   ├── *.dat                  # Arquivos de instância NEARP
+│   ├── listaNomeArquivos.csv # Mapeia IDs para nomes dos arquivos .dat
+│   └── reference_values.csv   # Contém valores de referência (ótimos ou melhores conhecidos)
 
-nomeArquivos.csv: lista de instâncias
 
-leitor.py, grafo.py, estatisticas.py: módulos auxiliares
+# Funcionalidades
+O programa permite:
 
-main.ipynd: notebook opcional para testes
+  Leitura e interpretação completa dos arquivos .dat do NEARP.
 
-Estatísticas calculadas
-Vértices, arestas, arcos (total e requeridos)
+  Cálculo de estatísticas de grafos:
 
-Densidade
+    Grau mínimo e máximo dos vértices.
 
-Componentes conectados
+    Densidade da rede.
 
-Grau mínimo/máximo
+    Número de componentes conexas.
 
-Intermediação, caminho médio e diâmetro
+    Caminho médio e diâmetro.
+
+    Centralidade de intermediação (betweenness).
+
+  Geração de matrizes de caminhos mínimos entre todos os pares (baseado em Dijkstra).
+
+  Implementação de um algoritmo guloso para construir soluções viáveis com múltiplas rotas respeitando a capacidade dos veículos.
+
+  Escrita de arquivo de saída com formato compatível com benchmarks.
+
+# Como Executar
+1. Pré-requisitos:
+
+  Python 3.x
+
+  Bibliotecas: numpy
+
+2. Abrir e Executar o Notebook:
+
+  No terminal:
+    jupyter notebook vizualizarGrafo.ipynb
+
+  Ou abra no VSCode e execute 
+
+
+# Dados de Entrada
+
+🔹 Arquivos .dat
+Cada arquivo define uma instância com:
+
+Capacidade do veículo
+
+Nó depósito
+
+Número de vértices
+
+Arestas/arcos obrigatórios (com demanda)
+
+Arestas/arcos opcionais (sem demanda)
+
+🔹 listaNomeArquivos.csv
+Relaciona IDs com nomes de arquivos .dat.
+
+🔹 reference_values.csv
+Contém as melhores soluções conhecidas para comparação.
+
+# Saídas Geradas
+Os arquivos gerados pelo notebook seguem o formato esperado por sistemas de benchmark:
+9700        # custo total da solução
+7           # número de rotas
+110         # tempo de execução (em clocks)
+80          # tempo da melhor solução encontrada
+
+ 0 1 1 3500 1400 4 (D 0,1,1) (S 2,10,15) (S 5,15,20) (D 0,1,1)
+ ...
